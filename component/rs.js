@@ -13,6 +13,7 @@ const facebook = () => copyPaste("https://www.facebook.com/profile.php?id=615665
 const instagram = () => copyPaste("https://www.instagram.com/quesoscorralitosv/");
 const whatsapp = () => copyPaste("https://www.instagram.com/quesoscorralitosv/");
 export const initRs = () => {
+    luyval.title("Producto - Redes Sociales");
     luyval.css.add("./css/rs.css");
     luyval.css.remove("./css/product.css");
     luyval.css.remove("./css/sales.css");

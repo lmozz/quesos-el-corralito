@@ -94,6 +94,7 @@ const onOffProduct = e => {
     `);
 };
 export const initStock = async () => {
+    luyval.title("Producto - Inventario");
     luyval.css.add("./css/stock.css");
     luyval.css.remove("./css/product.css");
     luyval.css.remove("./css/rs.css");

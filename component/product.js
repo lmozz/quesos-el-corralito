@@ -4,6 +4,7 @@ import { menu } from "./menu.js";
 import { gproduct, gsale, ssale } from "./key.js";
 let order = [];
 export const initProduct = () => {
+    luyval.title("Producto - Quesos el Corralito");
     luyval.css.add("./css/product.css");
     luyval.css.remove("./css/rs.css");
     luyval.css.remove("./css/sales.css");

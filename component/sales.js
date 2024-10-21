@@ -53,6 +53,7 @@ const renderSales = data => {
     }
 };
 export const initSales = async () => {
+    luyval.title("Producto - Ventas");
     luyval.css.add("./css/sales.css");
     luyval.css.remove("./css/product.css");
     luyval.css.remove("./css/rs.css");

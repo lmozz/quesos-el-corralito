@@ -1,4 +1,4 @@
-import { luyval, $ } from "/library/luyval.js";
+import { luyval, $ } from "./../library/luyval.js";
 import { initProduct } from "./product.js";
 import { initRs } from "./rs.js";
 import { initSales } from "./sales.js";

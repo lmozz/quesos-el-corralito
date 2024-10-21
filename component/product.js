@@ -1,5 +1,5 @@
 
-import { luyval, $ } from "/library/luyval.js";
+import { luyval, $ } from "./../library/luyval.js";
 import { menu } from "./menu.js";
 import { gproduct, gsale, ssale } from "./key.js";
 let order = [];

@@ -1,5 +1,5 @@
-import { luyval, $ } from "/quesos-el-corralito/library/luyval.js";
-import { menu } from "/quesos-el-corralito/component/menu.js";
+import { luyval, $ } from "./../library/luyval.js";
+import { menu } from "./menu.js";
 import { gsale, gproduct, sproduct, adminPass } from "./key.js";
 let sales = $(gsale);
 let product = $(gproduct);
@@ -30,10 +30,10 @@ const renderProduct = () => {
     `;
 }
 export const initStock = async () => {
-    luyval.css.add("/quesos-el-corralito/css/stock.css");
-    luyval.css.remove("/quesos-el-corralito/css/product.css");
-    luyval.css.remove("/quesos-el-corralito/css/rs.css");
-    luyval.css.remove("/quesos-el-corralito/css/sales.css");
+    luyval.css.add("./css/stock.css");
+    luyval.css.remove("./css/product.css");
+    luyval.css.remove("./css/rs.css");
+    luyval.css.remove("./css/sales.css");
     luyval.body();
     await luyval.sleep(1);
     let html = "";

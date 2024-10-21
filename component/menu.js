@@ -1,10 +1,10 @@
-import { luyval, $ } from "/quesos-el-corralito/library/luyval.js";
-import { initProduct } from "/quesos-el-corralito/component/product.js";
-import { initRs } from "/quesos-el-corralito/component/rs.js";
-import { initSales } from "/quesos-el-corralito/component/sales.js";
-import { initStock } from "/quesos-el-corralito/component/stock.js";
-import { gsale, gproduct, adminPass } from "/quesos-el-corralito/component/key.js";
-luyval.css.add("/quesos-el-corralito/css/menu.css");
+import { luyval, $ } from "/library/luyval.js";
+import { initProduct } from "./product.js";
+import { initRs } from "./rs.js";
+import { initSales } from "./sales.js";
+import { initStock } from "./stock.js";
+import { gsale, gproduct, adminPass } from "./key.js";
+luyval.css.add("./css/menu.css");
 const goToSalePoint = () => initProduct();
 const goToRs = () => initRs();
 const goToSales = () => initSales();

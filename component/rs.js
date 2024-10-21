@@ -1,5 +1,5 @@
-import { luyval } from "/quesos-el-corralito/library/luyval.js";
-import { menu } from "/quesos-el-corralito/component/menu.js";
+import { luyval } from "./../library/luyval.js";
+import { menu } from "./menu.js";
 const copyPaste = str =>  {
     const textarea = document.createElement('textarea');
     textarea.value = str;
@@ -13,10 +13,10 @@ const facebook = () => copyPaste("https://www.facebook.com/profile.php?id=615665
 const instagram = () => copyPaste("https://www.instagram.com/quesoscorralitosv/");
 const whatsapp = () => copyPaste("https://www.instagram.com/quesoscorralitosv/");
 export const initRs = () => {
-    luyval.css.add("/quesos-el-corralito/css/rs.css");
-    luyval.css.remove("/quesos-el-corralito/css/product.css");
-    luyval.css.remove("/quesos-el-corralito/css/sales.css");
-    luyval.css.remove("/quesos-el-corralito/css/stock.css");
+    luyval.css.add("./css/rs.css");
+    luyval.css.remove("./css/product.css");
+    luyval.css.remove("./css/sales.css");
+    luyval.css.remove("./css/stock.css");
     luyval.event.click({
         fb: facebook,
         in: instagram,
@@ -27,17 +27,17 @@ export const initRs = () => {
         <div class="container">
             <div class="social-card">
                 <h1>FaceBook</h1>
-                <img src="/quesos-el-corralito/img/facebook.png" alt="Facebook" />
+                <img src="./img/facebook.png" alt="Facebook" />
                 <button fb>Copiar Enlace</button>
             </div>
             <div class="social-card">
                 <h1>Instagram</h1>
-                <img src="/quesos-el-corralito/img/instagram.png" alt="Instagram" />
+                <img src="./img/instagram.png" alt="Instagram" />
                 <button in>Copiar Enlace</button>
             </div>
             <div class="social-card">
                 <h1>WhatsApp</h1>
-                <img src="/quesos-el-corralito/img/whatsapp.png" alt="WhatsApp" />
+                <img src="./img/whatsapp.png" alt="WhatsApp" />
                 <button wa>Copiar Enlace</button>
             </div>
         </div>

@@ -1,13 +1,13 @@
 
-import { luyval, $ } from "/quesos-el-corralito/library/luyval.js";
-import { menu } from "/quesos-el-corralito/component/menu.js";
-import { gproduct, gsale, ssale } from "/quesos-el-corralito/component/key.js";
+import { luyval, $ } from "/library/luyval.js";
+import { menu } from "./menu.js";
+import { gproduct, gsale, ssale } from "./key.js";
 let order = [];
 export const initProduct = () => {
-    luyval.css.add("/quesos-el-corralito/css/product.css");
-    luyval.css.remove("/quesos-el-corralito/css/rs.css");
-    luyval.css.remove("/quesos-el-corralito/css/sales.css");
-    luyval.css.remove("/quesos-el-corralito/css/stock.css");
+    luyval.css.add("./css/product.css");
+    luyval.css.remove("./css/rs.css");
+    luyval.css.remove("./css/sales.css");
+    luyval.css.remove("./css/stock.css");
     let products = $(gproduct);
     if (!products) {
         alert("No hay ningun producto para vender");

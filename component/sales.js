@@ -1,6 +1,6 @@
-import { luyval, $ } from "/quesos-el-corralito/library/luyval.js";
-import { menu } from "/quesos-el-corralito/component/menu.js";
-import { gsale, adminPass } from "/quesos-el-corralito/component/key.js";
+import { luyval, $ } from "./../library/luyval.js";
+import { menu } from "./menu.js";
+import { gsale, adminPass } from "./key.js";
 const formatDate = dateStr => dateStr.split(" ")[0];
 const groupSalesByDate = data => {
     return data.reduce((acc, sale) => {
@@ -53,10 +53,10 @@ const renderSales = data => {
     }
 };
 export const initSales = async () => {
-    luyval.css.add("/quesos-el-corralito/css/sales.css");
-    luyval.css.remove("/quesos-el-corralito/css/product.css");
-    luyval.css.remove("/quesos-el-corralito/css/rs.css");
-    luyval.css.remove("/quesos-el-corralito/css/stock.css");
+    luyval.css.add("./css/sales.css");
+    luyval.css.remove("./css/product.css");
+    luyval.css.remove("./css/rs.css");
+    luyval.css.remove("./css/stock.css");
     luyval.body();
     await luyval.sleep(1);
     let sales = $(gsale);

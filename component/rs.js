@@ -8,7 +8,7 @@ const copyPaste = str =>  {
     document.execCommand('copy');
     document.body.removeChild(textarea);
     alert('Texto copiado al portapapeles');
-}
+};
 const facebook = () => copyPaste("https://www.facebook.com/profile.php?id=61566525224902");
 const instagram = () => copyPaste("https://www.instagram.com/quesoscorralitosv/");
 const whatsapp = () => copyPaste("https://www.instagram.com/quesoscorralitosv/");
@@ -43,4 +43,4 @@ export const initRs = () => {
             </div>
         </div>
     `);
-}
+};

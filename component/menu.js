@@ -23,7 +23,7 @@ const makeBackUp = () => {
     if (products != false) {
         luyval.json.download(products, `BACKUP-${luyval.date(true)}-PRODUCT`);
     }
-}
+};
 luyval.event.click({
     sale_point: goToSalePoint,
     rs: goToRs,

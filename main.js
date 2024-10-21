@@ -1,4 +1,4 @@
-import { luyval, $ } from "./library/luyval.js"
+import { luyval } from "./library/luyval.js"
 import { initProduct } from "./component/product.js";
 luyval.init(() => {
     luyval.error("Lilian de Ramirez");

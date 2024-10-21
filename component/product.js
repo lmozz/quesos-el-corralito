@@ -30,7 +30,7 @@ export const initProduct = () => {
         <br />
         ${generateHTML(products)}
     `);
-}
+};
 export const generateHTML = products => {
     if (!products) return "";
     const categories = products.reduce((acc, product) => {
@@ -109,7 +109,7 @@ export const eraseDoc = (_, pass = false) => {
             ${generateHTML(products)}
         `);
     }
-}
+};
 export const print = () => {
     if (order.length < 1) return;
     const divToPrint = document.getElementById('invoice');
@@ -124,7 +124,7 @@ export const print = () => {
     newWindow.onafterprint = function() {
         newWindow.close();
     };
-}
+};
 export const invoice = () => {
     let html = "";
     let total = 0;
@@ -141,7 +141,7 @@ export const invoice = () => {
     });
     $("#order").innerHTML = html;
     $("#total").innerHTML = total.toFixed(2);
-}
+};
 export const saveDoc = () => {
     if (order.length == 0) return;
     let newOrders = [];
@@ -166,7 +166,7 @@ export const saveDoc = () => {
     $(ssale, sales);
     eraseDoc(null, true);
     alert(`Venta #${sales.length} guardada correctamente`);
-}
+};
 export const upload = e => {
     let counter = parseInt(luyval.e.get(e.parentElement, "counter"));
     counter++;
@@ -186,7 +186,7 @@ export const upload = e => {
         existingProduct.counter = counter;
     }
     invoice();
-}
+};
 export const download = e => {
     let counter = parseInt(luyval.e.get(e.parentElement, "counter"));
     counter--;
@@ -204,4 +204,4 @@ export const download = e => {
         order.splice(index, 1);
     }
     invoice();
-}
+};

@@ -9,6 +9,7 @@ export const initProduct = () => {
     luyval.css.remove("./css/sales.css");
     luyval.css.remove("./css/stock.css");
     let products = $(gproduct);
+    products = products.filter(_ => _.quantity > 0 && _.enable);
     if (!products) {
         alert("No hay ningun producto para vender");
     }

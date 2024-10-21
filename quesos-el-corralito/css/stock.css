@@ -1,0 +1,19 @@
+.product-container {
+    text-align: center;
+}
+.product-item {
+    text-align: left;
+    display: inline-block;
+    padding: 10px;
+    width: 15%;
+    box-shadow: 0px 0px 20px darkslateblue;
+    border-radius: 10px;
+    margin: 20px;
+}
+.product-item label {
+    font-weight: bold;
+    cursor: pointer;
+}
+.product-container label:hover {
+    color: crimson;
+}

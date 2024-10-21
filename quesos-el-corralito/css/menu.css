@@ -1,0 +1,29 @@
+.menu-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #333;
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+.menu-item {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.menu-item:hover {
+    background-color: #575757;
+    border-radius: 5px;
+}
+body {
+    margin-top: 50px;
+}
+.red {
+    color: crimson;
+    font-weight: bold;
+}

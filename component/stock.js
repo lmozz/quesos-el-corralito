@@ -102,23 +102,19 @@ export const initStock = async () => {
     luyval.body();
     await luyval.sleep(1);
     let html = "";
-    if (!product){
-        alert("No hay productos que mostrar");
+    let password = prompt("Ingrese la constraseña de administrador");
+    if (password !== adminPass) {
+        alert("Contraseña incorrecta");
     } else {
-        let password = prompt("Ingrese la constraseña de administrador");
-        if (password !== adminPass) {
-            alert("Contraseña incorrecta");
-        } else {
-            luyval.event.click({
-                edit_name: [ editProperty, "name", "Ingrese el nuevo nombre", "No se edito el nombre" ],
-                edit_category: [ editProperty, "category", "Ingrese la nueva categoria", "No se edito la categoria" ],
-                edit_price: [ editProperty, "price", "Ingrese el nuevo precio", "No se edito el precio" ] ,
-                enter: enterProduct,
-                new: newProduct,
-                onoff_product: onOffProduct, 
-            });
-            html = renderProduct();
-        }
+        luyval.event.click({
+            edit_name: [ editProperty, "name", "Ingrese el nuevo nombre", "No se edito el nombre" ],
+            edit_category: [ editProperty, "category", "Ingrese la nueva categoria", "No se edito la categoria" ],
+            edit_price: [ editProperty, "price", "Ingrese el nuevo precio", "No se edito el precio" ] ,
+            enter: enterProduct,
+            new: newProduct,
+            onoff_product: onOffProduct, 
+        });
+        html = renderProduct();
     }
     luyval.body(/*html*/`
         ${menu}

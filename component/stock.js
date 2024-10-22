@@ -9,6 +9,9 @@ const renderProduct = () => {
     if (!product) return "";
     let html = /*html*/`
         <button class="pretty" new>Nuevo</button>
+        <button class="pretty warn" add>Agregar a Inventario</button>
+        <button class="pretty err" close>Cerrar Dia</button>
+        <button class="pretty err" entrys>Ver Ingresos</button>
         <div class="product-container">
     `;
     product.forEach(_ => {

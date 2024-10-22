@@ -1,0 +1,12 @@
+stock
+    botones
+        agregar a inventario
+        cerrar dia
+        ver ingresos
+sales
+    filtro promp opcional 
+        filtro de fecha o titulo
+    botones
+        descargar
+            excel
+            pdf

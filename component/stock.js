@@ -2,6 +2,7 @@ import { luyval, $ } from "./../library/luyval.js";
 import { menu } from "./menu.js";
 import { gproduct, sproduct, adminPass, slist, glist } from "./key.js";
 import { removeCss } from "../tools/cssRemove.js";
+import { title } from "../tools/title.js";
 let product = $(gproduct);
 const renderProduct = () => {
     if (!product) return "";
@@ -95,7 +96,7 @@ const onOffProduct = e => {
     `);
 };
 export const initStock = async () => {
-    luyval.title("Producto - Inventario");
+    title("Inventario");
     removeCss("./css/stock.css");
     luyval.body();
     await luyval.sleep(1);

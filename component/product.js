@@ -3,9 +3,10 @@ import { luyval, $ } from "./../library/luyval.js";
 import { menu } from "./menu.js";
 import { removeCss } from "../tools/cssRemove.js";
 import { gproduct, gsale, ssale } from "./key.js";
+import { title } from "../tools/title.js";
 let order = [];
 export const initProduct = () => {
-    luyval.title("Producto - Quesos el Corralito");
+    title("Producto");
     removeCss("./css/product.css");
     let products = $(gproduct);
     products = products.filter(_ => _.quantity > 0 && _.enable);

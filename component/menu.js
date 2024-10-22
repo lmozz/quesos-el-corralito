@@ -17,7 +17,6 @@ const makeBackUp = () => {
     let sales = $(gsale);
     let products = $(gproduct);
     let list = $(glist);
-    console.log(list);
     if (sales != false) {
         luyval.json.download(sales, `BACKUP-${luyval.date(true)}-SALE`);
     }

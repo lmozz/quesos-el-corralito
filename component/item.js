@@ -9,7 +9,6 @@ luyval.event.click({
     back: backToProduct,
 });
 export const initItem = uuid => {
-    console.log(uuid);
     title("Item");
     removeCss("./css/item.css");
     let list = $(glist);

@@ -9,6 +9,11 @@ h1 {
     margin-bottom: 10px;
 }
 
+.sale {
+    color: crimson;
+    cursor: pointer;
+}
+
 .sale-group {
     margin-bottom: 20px;
     background-color: #fff;

@@ -18,7 +18,7 @@ const generateHTML = groupedSales => {
         html += `<h1>${date}</h1>`;
         groupedSales[date].forEach(sale => {
             html += /*html*/`
-            <div><strong>Fecha:</strong> ${sale.time}</div>
+            <div><strong class="sale" delete>Fecha:</strong> ${sale.time}</div>
             <div><strong>Total:</strong> $${sale.total.toFixed(2)}</div>
             <table>
                 <thead>

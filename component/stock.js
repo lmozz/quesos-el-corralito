@@ -3,6 +3,7 @@ import { menu } from "./menu.js";
 import { gproduct, sproduct, adminPass, slist, glist } from "./key.js";
 import { removeCss } from "../tools/cssRemove.js";
 import { title } from "../tools/title.js";
+import { initItem } from "./item.js";
 let product = $(gproduct);
 const renderProduct = () => {
     if (!product) return "";
@@ -60,7 +61,7 @@ const editProperty = (e, prop, message, error) => {
 };
 const enterProduct = e => {
     let uuid = luyval.e.get(e.parentElement.parentElement, "uuid");
-    
+    initItem(uuid);
 };
 const newProduct = () => {
     let name = prompt("Nombre del nuevo producto");
@@ -95,29 +96,42 @@ const onOffProduct = e => {
         ${renderProduct()}
     `);
 };
-export const initStock = async () => {
+const createEvents = () => {
+    luyval.event.click({
+        edit_name: [ editProperty, "name", "Ingrese el nuevo nombre", "No se edito el nombre" ],
+        edit_category: [ editProperty, "category", "Ingrese la nueva categoria", "No se edito la categoria" ],
+        edit_price: [ editProperty, "price", "Ingrese el nuevo precio", "No se edito el precio" ] ,
+        enter: enterProduct,
+        new: newProduct,
+        onoff_product: onOffProduct, 
+    });
+}
+export const initStock = async (pass = true) => {
     title("Inventario");
     removeCss("./css/stock.css");
     luyval.body();
-    await luyval.sleep(1);
-    let html = "";
-    let password = prompt("Ingrese la constraseña de administrador");
-    if (password !== adminPass) {
-        alert("Contraseña incorrecta");
+    if (pass) {
+        await luyval.sleep(1);
+        let html = "";
+        let password = prompt("Ingrese la constraseña de administrador");
+        if (password !== adminPass) {
+            alert("Contraseña incorrecta");
+        } else {
+            createEvents();
+            html = renderProduct();
+        }
+        luyval.body(/*html*/`
+            ${menu}
+            <br />
+            ${html}
+        `);
     } else {
-        luyval.event.click({
-            edit_name: [ editProperty, "name", "Ingrese el nuevo nombre", "No se edito el nombre" ],
-            edit_category: [ editProperty, "category", "Ingrese la nueva categoria", "No se edito la categoria" ],
-            edit_price: [ editProperty, "price", "Ingrese el nuevo precio", "No se edito el precio" ] ,
-            enter: enterProduct,
-            new: newProduct,
-            onoff_product: onOffProduct, 
-        });
-        html = renderProduct();
+        let html = "";
+        createEvents();
+        luyval.body(/*html*/`
+            ${menu}
+            <br />
+            ${renderProduct()}
+        `);
     }
-    luyval.body(/*html*/`
-        ${menu}
-        <br />
-        ${html}
-    `);
 };

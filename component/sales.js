@@ -1,6 +1,6 @@
 import { luyval, $ } from "./../library/luyval.js";
 import { menu } from "./menu.js";
-import { gsale, adminPass } from "./key.js";
+import { gsale, adminPass, ssale } from "./key.js";
 import { removeCss } from "../tools/cssRemove.js";
 import { title } from "../tools/title.js";
 const formatDate = dateStr => dateStr.split(" ")[0];
@@ -18,8 +18,9 @@ const generateHTML = groupedSales => {
         html += `<h1>${date}</h1>`;
         groupedSales[date].forEach(sale => {
             html += /*html*/`
-            <div><strong class="sale" delete>Fecha:</strong> ${sale.time}</div>
-            <div><strong>Total:</strong> $${sale.total.toFixed(2)}</div>
+            <div><strong class="sale" delete uuid="${sale.uuid}">Fecha:</strong> ${sale.time}</div>
+            <div><strong>Total:</strong> <strong>$${sale.total.toFixed(2)}</strong></div>
+            <div><strong class="title" rename uuid="${sale.uuid}">Titulo:</strong> ${sale.title}</div>
             <table>
                 <thead>
                     <tr>
@@ -54,11 +55,37 @@ const renderSales = data => {
         return "";
     }
 };
+const renameSale = e => {
+    let title = prompt("Ingrese el nombre de esta venta");
+    if (title == "") return alert("No se le asigno ningun nombre");
+    let sales = $(gsale);
+    let sale = sales.find(_ => _.uuid === luyval.e.get(e, "uuid"));
+    sale.title = title;
+    $(ssale, sales);
+    luyval.body(/*html*/`
+        ${menu}
+        <br />
+        ${renderSales(sales)}
+    `);
+}
+const deleteSale = e => {
+    let ok = confirm("Esta seguro que desea eliminar esta venta ?");
+    if (!ok) return;
+    let sales = $(gsale);
+    let index = sales.findIndex(_ => _.uuid === luyval.e.get(e, "uuid"));
+    sales.splice(index, 1);
+    $(ssale, sales);
+    luyval.body(/*html*/`
+        ${menu}
+        <br />
+        ${renderSales(sales)}
+    `);
+}
 export const initSales = async () => {
     title("Productos");
     removeCss("./css/sales.css");
     luyval.body();
-    await luyval.sleep(1);
+    await luyval.sleep(0.25);
     let sales = $(gsale);
     let html = "";
     if (!sales) {
@@ -69,6 +96,10 @@ export const initSales = async () => {
             alert("Contraseña incorrecta");
         } else {
             html = renderSales(sales);
+            luyval.event.click({
+                delete: deleteSale,
+                rename: renameSale,
+            });
         }
     }
     luyval.body(/*html*/`

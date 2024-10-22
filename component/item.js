@@ -32,7 +32,7 @@ export const initItem = uuid => {
             <tr>
                 <td>${listCount--}</td>
                 <td>${_.date}</td>
-                <td>${_.price}</td>
+                <td>$${_.price}</td>
             </tr>`;
     });
     listHtml += /*html*/`

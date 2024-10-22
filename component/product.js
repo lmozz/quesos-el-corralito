@@ -93,6 +93,7 @@ export const eraseDoc = (_, pass = false) => {
         if (ask) {
             order = [];
             let products = $(gproduct);
+            products = products.filter(_ => _.quantity > 0 && _.enable);
             luyval.body(/*html*/`
                 ${menu}
                 <br />
@@ -102,6 +103,7 @@ export const eraseDoc = (_, pass = false) => {
     } else {
         order = [];
         let products = $(gproduct);
+        products = products.filter(_ => _.quantity > 0 && _.enable);
         luyval.body(/*html*/`
             ${menu}
             <br />
@@ -153,6 +155,8 @@ export const saveDoc = () => {
         });
     });
     let newOrder = {
+        title: "",
+        uuid: luyval.randomCode(50),
         time: luyval.date(),
         total: parseFloat($("#total").innerHTML),
         sale: newOrders,

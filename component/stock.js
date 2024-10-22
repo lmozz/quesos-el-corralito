@@ -111,7 +111,7 @@ export const initStock = async (pass = true) => {
     removeCss("./css/stock.css");
     luyval.body();
     if (pass) {
-        await luyval.sleep(1);
+        await luyval.sleep(0.25);
         let html = "";
         let password = prompt("Ingrese la constraseña de administrador");
         if (password !== adminPass) {

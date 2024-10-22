@@ -1,14 +1,12 @@
 
 import { luyval, $ } from "./../library/luyval.js";
 import { menu } from "./menu.js";
+import { removeCss } from "../tools/cssRemove.js";
 import { gproduct, gsale, ssale } from "./key.js";
 let order = [];
 export const initProduct = () => {
     luyval.title("Producto - Quesos el Corralito");
-    luyval.css.add("./css/product.css");
-    luyval.css.remove("./css/rs.css");
-    luyval.css.remove("./css/sales.css");
-    luyval.css.remove("./css/stock.css");
+    removeCss("./css/product.css");
     let products = $(gproduct);
     products = products.filter(_ => _.quantity > 0 && _.enable);
     if (!products) {

@@ -4,7 +4,6 @@ import { initRs } from "./rs.js";
 import { initSales } from "./sales.js";
 import { initStock } from "./stock.js";
 import { gsale, gproduct, adminPass } from "./key.js";
-luyval.css.add("./css/menu.css");
 const goToSalePoint = () => initProduct();
 const goToRs = () => initRs();
 const goToSales = () => initSales();
@@ -24,6 +23,7 @@ const makeBackUp = () => {
         luyval.json.download(products, `BACKUP-${luyval.date(true)}-PRODUCT`);
     }
 };
+luyval.css.add("./css/menu.css");
 luyval.event.click({
     sale_point: goToSalePoint,
     rs: goToRs,

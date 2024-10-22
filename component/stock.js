@@ -1,6 +1,7 @@
 import { luyval, $ } from "./../library/luyval.js";
 import { menu } from "./menu.js";
 import { gproduct, sproduct, adminPass, slist, glist } from "./key.js";
+import { removeCss } from "../tools/cssRemove.js";
 let product = $(gproduct);
 const renderProduct = () => {
     if (!product) return "";
@@ -58,7 +59,7 @@ const editProperty = (e, prop, message, error) => {
 };
 const enterProduct = e => {
     let uuid = luyval.e.get(e.parentElement.parentElement, "uuid");
-    console.log(uuid);
+    
 };
 const newProduct = () => {
     let name = prompt("Nombre del nuevo producto");
@@ -95,10 +96,7 @@ const onOffProduct = e => {
 };
 export const initStock = async () => {
     luyval.title("Producto - Inventario");
-    luyval.css.add("./css/stock.css");
-    luyval.css.remove("./css/product.css");
-    luyval.css.remove("./css/rs.css");
-    luyval.css.remove("./css/sales.css");
+    removeCss("./css/stock.css");
     luyval.body();
     await luyval.sleep(1);
     let html = "";

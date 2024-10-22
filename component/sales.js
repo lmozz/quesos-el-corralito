@@ -1,6 +1,7 @@
 import { luyval, $ } from "./../library/luyval.js";
 import { menu } from "./menu.js";
 import { gsale, adminPass } from "./key.js";
+import { removeCss } from "../tools/cssRemove.js";
 const formatDate = dateStr => dateStr.split(" ")[0];
 const groupSalesByDate = data => {
     return data.reduce((acc, sale) => {
@@ -54,10 +55,7 @@ const renderSales = data => {
 };
 export const initSales = async () => {
     luyval.title("Producto - Ventas");
-    luyval.css.add("./css/sales.css");
-    luyval.css.remove("./css/product.css");
-    luyval.css.remove("./css/rs.css");
-    luyval.css.remove("./css/stock.css");
+    removeCss("./css/sales.css");
     luyval.body();
     await luyval.sleep(1);
     let sales = $(gsale);

@@ -1,3 +1,4 @@
+import { removeCss } from "../tools/cssRemove.js";
 import { luyval } from "./../library/luyval.js";
 import { menu } from "./menu.js";
 const copyPaste = str =>  {
@@ -14,10 +15,7 @@ const instagram = () => copyPaste("https://www.instagram.com/quesoscorralitosv/"
 const whatsapp = () => copyPaste("https://www.instagram.com/quesoscorralitosv/");
 export const initRs = () => {
     luyval.title("Producto - Redes Sociales");
-    luyval.css.add("./css/rs.css");
-    luyval.css.remove("./css/product.css");
-    luyval.css.remove("./css/sales.css");
-    luyval.css.remove("./css/stock.css");
+    removeCss("./css/rs.css");
     luyval.event.click({
         fb: facebook,
         in: instagram,

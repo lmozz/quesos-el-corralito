@@ -45,3 +45,39 @@ button {
 .pretty.err {
     background-color: crimson;
 }
+.none {
+    display: none;
+}
+.pretty-2 {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.pretty-2:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+.pretty-2:active {
+    background-color: #3e8e41;
+    transform: translateY(0);
+}
+
+.pretty-2.warn {
+    background-color: darkgoldenrod;
+}
+
+.pretty-2.err {
+    background-color: crimson;
+}

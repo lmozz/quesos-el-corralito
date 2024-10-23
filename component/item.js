@@ -9,7 +9,7 @@ luyval.event.click({
     back: backToProduct,
 });
 export const initItem = uuid => {
-    title("Item");
+    title("Lista de Precios");
     removeCss("./css/item.css");
     let list = $(glist);
     if (!list) list = [];

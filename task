@@ -1,7 +1,5 @@
 stock
     botones
-        agregar a inventario
-        cerrar dia
         ver ingresos
 sales
     filtro promp opcional 
@@ -12,3 +10,7 @@ sales
             pdf
 product
     en el listado de categorias que se pueda desplegar y encoger cada categorias para hacer mas facil la busqueda
+backup
+    pagina
+        cargar info
+        descargar info

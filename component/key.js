@@ -1,7 +1,11 @@
 export const gsale = "<V3N-0H-2W2L-04P6EQF5HDN9F2F1-DAM108U";
 export const gproduct = "<K90DH2CFJ0-5XJABB0E4EXEVW-8155-3DGFV";
 export const glist = "<HEVQ-K2020917Y8-A2Q8FEZ3ZA-OXY5Y24UQ";
+export const gclose = "<E90E9D974B642191-2-BEC-4ABD769420A0A";
+export const gstock = "<B84BD-10-1C-13E38A09-C483774-A590DA0";
 export const ssale = ">V3N-0H-2W2L-04P6EQF5HDN9F2F1-DAM108U";
 export const sproduct = ">K90DH2CFJ0-5XJABB0E4EXEVW-8155-3DGFV";
 export const slist = ">HEVQ-K2020917Y8-A2Q8FEZ3ZA-OXY5Y24UQ";
+export const sclose = ">E90E9D974B642191-2-BEC-4ABD769420A0A";
+export const sstock = ">B84BD-10-1C-13E38A09-C483774-A590DA0";
 export const adminPass = "";

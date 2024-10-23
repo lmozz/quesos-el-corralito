@@ -8,6 +8,13 @@ h1 {
     color: #333;
     margin-bottom: 10px;
 }
+tbody.close tr, tbody.close tr td, tbody.close{
+    color: crimson;
+}
+thead.close tr, thead.close tr th, thead.close{
+    color: white;
+    background-color: crimson;
+}
 
 .sale {
     color: crimson;

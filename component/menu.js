@@ -3,7 +3,7 @@ import { initProduct } from "./product.js";
 import { initRs } from "./rs.js";
 import { initSales } from "./sales.js";
 import { initStock } from "./stock.js";
-import { gsale, gproduct, adminPass, glist } from "./key.js";
+import { adminPass, gsale, gproduct, glist, gclose, gstock } from "./key.js";
 const goToSalePoint = () => initProduct();
 const goToRs = () => initRs();
 const goToSales = () => initSales();
@@ -17,6 +17,8 @@ const makeBackUp = () => {
     let sales = $(gsale);
     let products = $(gproduct);
     let list = $(glist);
+    let close = $(gclose);
+    let stock = $(gstock);
     if (sales != false) {
         luyval.json.download(sales, `BACKUP-${luyval.date(true)}-SALE`);
     }
@@ -25,6 +27,12 @@ const makeBackUp = () => {
     }
     if (list != false) {
         luyval.json.download(list, `BACKUP-${luyval.date(true)}-LIST`);
+    }
+    if (close != false) {
+        luyval.json.download(close, `BACKUP-${luyval.date(true)}-CLOSE`);
+    }
+    if (stock != false) {
+        luyval.json.download(stock, `BACKUP-${luyval.date(true)}-STOCK`);
     }
 };
 luyval.css.add("./css/menu.css");

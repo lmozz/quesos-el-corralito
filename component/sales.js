@@ -18,11 +18,11 @@ const generateHTML = groupedSales => {
         html += `<h1>${date}</h1>`;
         groupedSales[date].forEach(sale => {
             html += /*html*/`
-            <div><strong class="sale" delete uuid="${sale.uuid}">Fecha:</strong> ${sale.time}</div>
+            <div><strong class="sale" delete uuid="${sale.uuid}">Fecha${sale.close ? " cerrada" : ""}:</strong> ${sale.time}</div>
             <div><strong>Total:</strong> <strong>$${sale.total.toFixed(2)}</strong></div>
             <div><strong class="title" rename uuid="${sale.uuid}">Titulo:</strong> ${sale.title}</div>
             <table>
-                <thead>
+                <thead class="${sale.close ? "close" : ""}">
                     <tr>
                         <th>Producto</th>
                         <th>Cantidad</th>
@@ -30,7 +30,7 @@ const generateHTML = groupedSales => {
                         <th>Total</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="${sale.close ? "close" : ""}">
                     ${sale.sale.map(item => `
                         <tr>
                             <td>${item.name}</td>
@@ -69,10 +69,14 @@ const renameSale = e => {
     `);
 }
 const deleteSale = e => {
+    let sales = $(gsale);
+    let sale2delete = sales.find(_ => _.uuid == luyval.e.get(e, "uuid"));
+    if (sale2delete.close) {
+        return alert("No puede eliminar una venta cuyo dia este cerrado");
+    }
     let ok = confirm("Esta seguro que desea eliminar esta venta ?");
     if (!ok) return;
-    let sales = $(gsale);
-    let index = sales.findIndex(_ => _.uuid === luyval.e.get(e, "uuid"));
+    let index = sales.findIndex(_ => _.uuid == luyval.e.get(e, "uuid"));
     sales.splice(index, 1);
     $(ssale, sales);
     luyval.body(/*html*/`

@@ -147,14 +147,17 @@ export const saveDoc = () => {
     if (order.length == 0) return;
     let newOrders = [];
     order.forEach(_ => {
+        console.log(_);
         newOrders.unshift({
             counter: _.counter,
+            uuid: _.uuid,
             name: _.name,
             price: _.price,
             total: parseFloat((_.counter * _.price).toFixed(2)),
         });
     });
     let newOrder = {
+        close: false,
         title: "",
         uuid: luyval.randomCode(50),
         time: luyval.date(),

@@ -31,3 +31,6 @@
 .product-item input {
     cursor: pointer;
 }
+input[type="number"] {
+    width: 50px;
+}

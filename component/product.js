@@ -18,6 +18,7 @@ export const initProduct = () => {
             more: upload,
             minus: download,
             goto_print: print,
+            view_category: viewCategory,
         });
         luyval.event.click2({
             save: saveDoc,
@@ -25,10 +26,21 @@ export const initProduct = () => {
         });
     }
     luyval.body(/*html*/`
-        ${menu}
+        ${menu()}
         <br />
         ${generateHTML(products)}
     `);
+};
+const viewCategory = e => {
+    e = e.nextElementSibling;
+    let classs = luyval.e.get(e, "class");
+    if (!classs.includes("none")) {
+        luyval.class.add(e, "none");
+        return;
+    }
+    let categorys = Array.from($(".category-product"));
+    categorys.forEach(_ => luyval.class.add(_, "none"));
+    luyval.class.del(e, "none");
 };
 export const generateHTML = products => {
     if (!products) return "";
@@ -42,22 +54,24 @@ export const generateHTML = products => {
     }, {});
     let html = /*html*/`
         <div id="sale-point">
-        <button save class="pretty">Guardar</button>
-        <button goto-print class="pretty warn">Imprimir</button>
-        <button erase class="pretty err">Borrar</button>
+            <button save class="pretty">Guardar</button>
+            <button goto-print class="pretty warn">Imprimir</button>
+            <button erase class="pretty err">Borrar</button>
     `;
     for (const [category, products] of Object.entries(categories)) {
         html += /*html*/`
             <div class="category">
-                <h3>${category}</h3>
-                ${products.map(_ => /*html*/`
-                    <div class="product" uuid="${_.uuid}" counter="0">
-                        <strong>(0) </strong>
-                        <strong>${_.name} $${_.price}</strong>
-                        <button more>+</button>
-                        <button minus>-</button>
-                    </div>
-                `).join('')}
+                <h3 class="category-one" view-category>${category}</h3>
+                <div class="category-product none">
+                    ${products.map(_ => /*html*/`
+                        <div class="product" uuid="${_.uuid}" counter="0">
+                            <strong>(0) </strong>
+                            <strong>${_.name} $${_.price}</strong>
+                            <button more>+</button>
+                            <button minus>-</button>
+                        </div>
+                    `).join('')}
+                </div>
             </div>
         `;
     }
@@ -95,7 +109,7 @@ export const eraseDoc = (_, pass = false) => {
             let products = $(gproduct);
             products = products.filter(_ => _.quantity > 0 && _.enable);
             luyval.body(/*html*/`
-                ${menu}
+                ${menu()}
                 <br />
                 ${generateHTML(products)}
             `);
@@ -105,7 +119,7 @@ export const eraseDoc = (_, pass = false) => {
         let products = $(gproduct);
         products = products.filter(_ => _.quantity > 0 && _.enable);
         luyval.body(/*html*/`
-            ${menu}
+            ${menu()}
             <br />
             ${generateHTML(products)}
         `);
@@ -147,7 +161,6 @@ export const saveDoc = () => {
     if (order.length == 0) return;
     let newOrders = [];
     order.forEach(_ => {
-        console.log(_);
         newOrders.unshift({
             counter: _.counter,
             uuid: _.uuid,

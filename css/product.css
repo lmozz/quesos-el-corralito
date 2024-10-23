@@ -2,10 +2,20 @@
     display: flex;
     flex-wrap: wrap; 
 }
+.category-one {
+    cursor: pointer;
+    background-color: #333;
+    color: white;
+    padding: 10px;
+}
+.category-one:hover {
+    background-color: crimson;
+}
 
 .category {
     flex: 1 0 100%; 
-    margin: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .product {

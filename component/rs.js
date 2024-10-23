@@ -23,7 +23,7 @@ export const initRs = () => {
         wa: whatsapp,
     });
     luyval.body(/*html*/`
-        ${menu}
+        ${menu()}
         <div class="container">
             <div class="social-card">
                 <h1>FaceBook</h1>

@@ -16,13 +16,15 @@ thead.close tr, thead.close tr th, thead.close{
     background-color: crimson;
 }
 
-.sale {
-    color: crimson;
+.sale:hover {
+    background-color: crimson;
+    color: white;
     cursor: pointer;
 }
 
-.title {
-    color: green;
+.title:hover {
+    background-color: mediumseagreen;
+    color: white;
     cursor: pointer;
 }
 
@@ -74,4 +76,13 @@ table tr:hover {
 
 strong {
     color: #2980b9;
+}
+
+h1.title-date {
+    text-align: right;
+    color: white;
+    border: 3px solid #333;
+    background-color: #333;
+    padding: 10px;
+    border-radius: 10px;
 }

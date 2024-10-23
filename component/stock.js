@@ -5,6 +5,7 @@ import { removeCss } from "../tools/cssRemove.js";
 import { title } from "../tools/title.js";
 import { initItem } from "./item.js";
 import { initClose } from "./close.js";
+import { initEntry } from "./entry.js";
 let product = $(gproduct);
 const renderProduct = () => {
     if (!product) return "";
@@ -54,7 +55,7 @@ const editProperty = (e, prop, message, error) => {
     item[prop] = value;
     $(sproduct, product);
     luyval.body(/*html*/`
-        ${menu}
+        ${menu()}
         <br />
         ${renderProduct()}
     `);
@@ -89,7 +90,7 @@ const newProduct = () => {
     });
     $(sproduct, product);
     luyval.body(/*html*/`
-        ${menu}
+        ${menu()}
         <br />
         ${renderProduct()}
     `);
@@ -101,7 +102,7 @@ const onOffProduct = e => {
     item.enable = !item.enable;
     $(sproduct, product);
     luyval.body(/*html*/`
-        ${menu}
+        ${menu()}
         <br />
         ${renderProduct()}
     `);
@@ -127,12 +128,10 @@ const addStock = () => {
             flag = false;
             alert(`La cantidad del producto ${prodName} no es correcta`);
         }
-        console.log(quantity);
         if (price < 1 || price == "" || price == null || isNaN(price)) {
             flag = false;
             alert(`Las unidades del producto ${prodName} no es correcta`);
         }
-        console.log(price);
         quantity = parseInt(quantity);
         price = parseFloat(price);
         stockLine.unshift({
@@ -164,22 +163,18 @@ const addStock = () => {
         line: stockLine,
     });
     stockLine.forEach(_ => {
-        console.log(_);
-        console.log(product);
         let prod = product.find(__ => __.uuid == _.product.uuid);
         prod.quantity += _.quantity;
     });
     $(sstock, stock);
     $(sproduct, product);
     luyval.body(/*html*/`
-        ${menu}
+        ${menu()}
         <br />
         ${renderProduct()}
     `);
 };
-const seeEntrys = () => {
-
-};
+const seeEntrys = () => initEntry();
 const addItem = e => {
     let sales = $(gsale);
     if (!sales) sales = [];
@@ -200,7 +195,7 @@ const addItem = e => {
         e.children[1].value = "";
         e.children[4].value = "";
     }
-}
+};
 const seeClosesDay = () => initClose();
 const closeDay = () => {
     let sales = $(gsale);
@@ -228,7 +223,7 @@ const closeDay = () => {
     openSales = openSales.filter(_ => _.close);
     $(ssale, [ ...sales, ...openSales ]);
     luyval.body(/*html*/`
-        ${menu}
+        ${menu()}
         <br />
         ${renderProduct()}
     `);
@@ -249,31 +244,13 @@ const createEvents = () => {
         see_closes: seeClosesDay,
     });
 };
-export const initStock = async (pass = true) => {
+export const initStock = () => {
     title("Inventario");
     removeCss("./css/stock.css");
-    luyval.body();
-    if (pass) {
-        await luyval.sleep(0.25);
-        let html = "";
-        let password = prompt("Ingrese la constraseña de administrador");
-        if (password !== adminPass) {
-            alert("Contraseña incorrecta");
-        } else {
-            createEvents();
-            html = renderProduct();
-        }
-        luyval.body(/*html*/`
-            ${menu}
-            <br />
-            ${html}
-        `);
-    } else {
-        createEvents();
-        luyval.body(/*html*/`
-            ${menu}
-            <br />
-            ${renderProduct()}
-        `);
-    }
+    luyval.body(/*html*/`
+        ${menu()}
+        <br />
+        ${renderProduct()}
+    `);
+    createEvents();
 };

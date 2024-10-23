@@ -4,7 +4,7 @@ import { luyval, $ } from "../library/luyval.js";
 import { menu } from "./menu.js";
 import { initStock } from "./stock.js";
 import { glist } from "./key.js";
-const backToProduct = () => initStock(false);
+const backToProduct = () => initStock();
 luyval.event.click({
     back: backToProduct,
 });
@@ -39,7 +39,7 @@ export const initItem = uuid => {
         </table>
     `;
     luyval.body(/*html*/`
-        ${menu}
+        ${menu()}
         <br />
         <button class="pretty" back>Regresar</button>
         ${listHtml}

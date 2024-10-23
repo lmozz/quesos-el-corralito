@@ -14,7 +14,7 @@ th, td {
 }
 
 thead {
-    background-color: #333;
+    background-color: #0044cc; 
     color: white;
 }
 
@@ -26,6 +26,25 @@ tbody tr:hover {
     background-color: #ddd;
     cursor: pointer;
 }
+
 thead th {
     color: white;
+}
+
+tfoot {
+    background-color: rgb(208, 230, 255); 
+    color: #0044cc;
+    font-weight: bold;
+}
+
+tfoot td {
+    padding: 10px;
+    border-top: 2px solid #0044cc;
+    text-align: right;
+}
+
+tfoot td:hover, tfoot td:hover a {
+    background-color: #003399; 
+    color: #f3f3f3; 
+    transition: background-color 0.3s ease;
 }

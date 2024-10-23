@@ -1,13 +1,9 @@
-stock
-    botones
-        ver ingresos
 sales
     filtro promp opcional 
         filtro de fecha o titulo
     botones
         descargar
             excel
-            pdf
 product
     en el listado de categorias que se pueda desplegar y encoger cada categorias para hacer mas facil la busqueda
 backup

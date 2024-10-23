@@ -9,6 +9,10 @@
     left: 0;
     width: 100%;
 }
+.menu-container.root {
+    background-color: crimson;
+    box-shadow: 0px 0px 20px black;
+}
 .menu-item {
     color: white;
     text-decoration: none;

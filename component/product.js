@@ -6,7 +6,7 @@ import { gproduct, gsale, ssale } from "./key.js";
 import { title } from "../tools/title.js";
 let order = [];
 export const initProduct = () => {
-    title("Producto");
+    title("Punto de Venta");
     removeCss("./css/product.css");
     let products = $(gproduct);
     products = products.filter(_ => _.quantity > 0 && _.enable);

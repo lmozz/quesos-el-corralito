@@ -1,6 +1,6 @@
 import { luyval, $ } from "./../library/luyval.js";
 import { menu } from "./menu.js";
-import { gproduct, sproduct, adminPass, slist, glist, gsale, ssale, gclose, sclose, gstock, sstock } from "./key.js";
+import { gproduct, sproduct, slist, glist, gsale, ssale, gclose, sclose, gstock, sstock } from "./key.js";
 import { removeCss } from "../tools/cssRemove.js";
 import { title } from "../tools/title.js";
 import { initItem } from "./item.js";

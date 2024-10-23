@@ -3,11 +3,8 @@ import { initProduct } from "./product.js";
 import { initRs } from "./rs.js";
 import { initSales } from "./sales.js";
 import { initStock } from "./stock.js";
-import { adminPass, gsale, gproduct, glist, gclose, gstock, glogin, slogin, rlogin } from "./key.js";
-const goToSalePoint = () => initProduct();
-const goToRs = () => initRs();
-const goToSales = () => allowPass() ? initSales() : false;
-const goToStock = () => allowPass() ? initStock() : false;
+import { initBackUp } from "./backup.js";
+import { adminPass, glogin, slogin, rlogin } from "./key.js";
 const allowPass = () => {
     let login = $(glogin);
     if (login !== false) {
@@ -18,36 +15,17 @@ const allowPass = () => {
         }
     }
     let flag = (prompt("Ingrese la contraseña de administrador") || "") === adminPass;
-    console.log(flag);
     if (!flag) return false;
     $(slogin, {
         key: adminPass,
     });
     return true;
 };
-const makeBackUp = () => {
-    if (!allowPass()) return alert("No se pudo iniciar sesion");
-    let sales = $(gsale);
-    let products = $(gproduct);
-    let list = $(glist);
-    let close = $(gclose);
-    let stock = $(gstock);
-    if (sales != false) {
-        luyval.json.download(sales, `BACKUP-${luyval.date(true)}---SALE---`);
-    }
-    if (products != false) {
-        luyval.json.download(products, `BACKUP-${luyval.date(true)}---PRODUCT---`);
-    }
-    if (list != false) {
-        luyval.json.download(list, `BACKUP-${luyval.date(true)}---LIST---`);
-    }
-    if (close != false) {
-        luyval.json.download(close, `BACKUP-${luyval.date(true)}---CLOSE---`);
-    }
-    if (stock != false) {
-        luyval.json.download(stock, `BACKUP-${luyval.date(true)}---STOCK---`);
-    }
-};
+const goToSalePoint = () => initProduct();
+const goToRs = () => initRs();
+const goToSales = () => allowPass() ? initSales() : false;
+const goToStock = () => allowPass() ? initStock() : false;
+const goToBackUp = () => allowPass() ? initBackUp() : false;
 const closeSession = () => {
     $(rlogin);
     goToSalePoint();
@@ -58,7 +36,7 @@ luyval.event.click({
     rs: goToRs,
     stock: goToStock,
     sales: goToSales,
-    backup: makeBackUp,
+    backup: goToBackUp,
     close_session: closeSession,
 });
 export const menu = () => {

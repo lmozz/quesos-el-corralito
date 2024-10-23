@@ -9,6 +9,7 @@ export const initProduct = () => {
     title("Punto de Venta");
     removeCss("./css/product.css");
     let products = $(gproduct);
+    if (!products) products = [];
     products = products.filter(_ => _.quantity > 0 && _.enable);
     if (!products) {
         alert("No hay ningun producto para vender");

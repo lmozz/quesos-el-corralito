@@ -293,7 +293,10 @@ const luyvalConsole = () => {
             },         
         },
         body: {
-            write: (str) => $("body")[0].innerHTML = str,
+            write: str => {
+                $("body")[0].innerHTML = "";
+                $("body")[0].innerHTML = str;
+            },
         },
         dom: {
             set: (strAttribute, key, value) => {

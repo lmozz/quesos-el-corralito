@@ -1,6 +1,6 @@
 import { luyval, $ } from "./../library/luyval.js";
 import { menu } from "./menu.js";
-import { gsale, adminPass, ssale } from "./key.js";
+import { gsale, ssale } from "./key.js";
 import { removeCss } from "../tools/cssRemove.js";
 import { title } from "../tools/title.js";
 const formatDate = dateStr => dateStr.split(" ")[0];
@@ -205,9 +205,7 @@ export const initSales = () => {
     removeCss("./css/sales.css");
     let sales = $(gsale);
     let html = "";
-    if (!sales) {
-        alert("No hay ventas que mostrar");
-    } else {
+    if (sales != false) {
         html = renderSales(sales);
         luyval.event.click({
             delete: deleteSale,

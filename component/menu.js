@@ -11,6 +11,7 @@ const allowPass = () => {
         if (login.key === adminPass) {
             return true;
         } else {
+            $(rlogin);
             return false;
         }
     }

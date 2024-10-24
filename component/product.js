@@ -130,11 +130,29 @@ export const print = () => {
     if (order.length < 1) return;
     const divToPrint = document.getElementById('invoice');
     const newWindow = window.open('', '', 'height=400,width=600');
-    newWindow.document.write('<html><head><title>Imprimir</title>');
-    newWindow.document.write('<style>body { font-family: Arial, sans-serif; }</style>'); 
-    newWindow.document.write('</head><body>');
-    newWindow.document.write(divToPrint.outerHTML);
-    newWindow.document.write('</body></html>');
+    newWindow.document.write(/*html*/`
+        <html>
+            <head>
+                <title>Orden ${luyval.date(true)}</title>
+                <style>
+                    * {
+                        font-family: Arial, sans-serif;
+                        font-size: 60px;
+                    }
+                    table {
+                        width: 100%;
+                    }
+                    img {
+                        width: 100%;
+                        height: auto;
+                    }
+                </style>
+                <body>
+                    ${divToPrint.outerHTML}
+                </body>
+            </head>
+        </html>    
+    `);
     newWindow.document.close();
     newWindow.print();
     newWindow.onafterprint = function() {

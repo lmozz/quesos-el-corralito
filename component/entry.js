@@ -72,7 +72,7 @@ export const initEntry = () => {
                     <thead>
                         <tr>
                             <th>Producto</th>
-                            <th>Precio</th>
+                            <th>Costo</th>
                             <th>Cantidad</th>
                             <th>Total</th>
                         </tr>
@@ -83,9 +83,9 @@ export const initEntry = () => {
             listHtml += /*html*/`
                 <tr>
                     <td>${__.product.name}</td>
-                    <td>${__.price}</td>
-                    <td>$${__.quantity}</td>
-                    <td>${__.total}</td>
+                    <td>$${__.price}</td>
+                    <td>${__.quantity}</td>
+                    <td>$${__.total}</td>
                 </tr>
             `;
         });

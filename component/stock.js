@@ -10,11 +10,6 @@ let product = $(gproduct);
 const renderProduct = () => {
     if (!product) return "";
     let html = /*html*/`
-        <button class="pretty" new>Nuevo</button>
-        <button class="pretty warn" add>Agregar a Inventario</button>
-        <button class="pretty warn" entrys>Ver Ingresos</button>
-        <button class="pretty err" close>Cerrar Dia</button>
-        <button class="pretty err" see-closes>Ver Cierres</button>
         <div class="product-container">
     `;
     product.forEach(_ => {
@@ -57,6 +52,11 @@ const editProperty = (e, prop, message, error) => {
     luyval.body(/*html*/`
         ${menu()}
         <br />
+        <button class="pretty" new>Nuevo</button>
+        <button class="pretty warn" add>Agregar a Inventario</button>
+        <button class="pretty warn" entrys>Ver Ingresos</button>
+        <button class="pretty err" close>Cerrar Dia</button>
+        <button class="pretty err" see-closes>Ver Cierres</button>
         ${renderProduct()}
     `);
     if (prop == "price") {
@@ -91,6 +91,11 @@ const newProduct = () => {
     $(sproduct, product);
     luyval.body(/*html*/`
         ${menu()}
+        <button class="pretty" new>Nuevo</button>
+        <button class="pretty warn" add>Agregar a Inventario</button>
+        <button class="pretty warn" entrys>Ver Ingresos</button>
+        <button class="pretty err" close>Cerrar Dia</button>
+        <button class="pretty err" see-closes>Ver Cierres</button>
         <br />
         ${renderProduct()}
     `);
@@ -104,6 +109,11 @@ const onOffProduct = e => {
     luyval.body(/*html*/`
         ${menu()}
         <br />
+        <button class="pretty" new>Nuevo</button>
+        <button class="pretty warn" add>Agregar a Inventario</button>
+        <button class="pretty warn" entrys>Ver Ingresos</button>
+        <button class="pretty err" close>Cerrar Dia</button>
+        <button class="pretty err" see-closes>Ver Cierres</button>
         ${renderProduct()}
     `);
 };
@@ -171,6 +181,11 @@ const addStock = () => {
     luyval.body(/*html*/`
         ${menu()}
         <br />
+        <button class="pretty" new>Nuevo</button>
+        <button class="pretty warn" add>Agregar a Inventario</button>
+        <button class="pretty warn" entrys>Ver Ingresos</button>
+        <button class="pretty err" close>Cerrar Dia</button>
+        <button class="pretty err" see-closes>Ver Cierres</button>
         ${renderProduct()}
     `);
 };
@@ -225,6 +240,11 @@ const closeDay = () => {
     luyval.body(/*html*/`
         ${menu()}
         <br />
+        <button class="pretty" new>Nuevo</button>
+        <button class="pretty warn" add>Agregar a Inventario</button>
+        <button class="pretty warn" entrys>Ver Ingresos</button>
+        <button class="pretty err" close>Cerrar Dia</button>
+        <button class="pretty err" see-closes>Ver Cierres</button>
         ${renderProduct()}
     `);
     alert(`El dia ${luyval.date()} se cerro existosamente`);
@@ -250,6 +270,11 @@ export const initStock = () => {
     luyval.body(/*html*/`
         ${menu()}
         <br />
+        <button class="pretty" new>Nuevo</button>
+        <button class="pretty warn" add>Agregar a Inventario</button>
+        <button class="pretty warn" entrys>Ver Ingresos</button>
+        <button class="pretty err" close>Cerrar Dia</button>
+        <button class="pretty err" see-closes>Ver Cierres</button>
         ${renderProduct()}
     `);
     createEvents();

@@ -11,4 +11,4 @@ export const sclose = ">E90E9D974B642191-2-BEC-4ABD769420A0A";
 export const sstock = ">B84BD-10-1C-13E38A09-C483774-A590DA0";
 export const slogin = ">AE01E6A15E528-B47526AA861-5DF042-409";
 export const rlogin = "!AE01E6A15E528-B47526AA861-5DF042-409";
-export const adminPass = "";
+export const adminPass = "dinosabrio2024_";

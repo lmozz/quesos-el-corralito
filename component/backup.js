@@ -3,6 +3,7 @@ import { removeCss } from "../tools/cssRemove.js";
 import { title } from "../tools/title.js";
 import { gsale, gproduct, glist, gclose, gstock, ssale, sproduct, slist, sclose, sstock } from "./key.js";
 import { menu } from "./menu.js";
+let backupMade = false;
 const makeBackUp = () => {
     if (!confirm("Seguro que quieres descargar las bases de esta version ?")) return;
     let name = "";
@@ -20,6 +21,13 @@ const makeBackUp = () => {
         close: close ? close : [],
         stock: stock ? stock : [],
     }, `${name}BACKUP-${luyval.date(true)}`);
+    backupMade = true;
+};
+const deleteBackUp = () => {
+    if (!backupMade) return alert("Antes de eliminar realice una copia por seguridad");
+    if (!confirm("Seguro que desea eliminar la informacion ?")) return alert("Se cancelo la eliminacion de la informacion");
+    localStorage.clear();
+    window.location.reload();
 };
 const loadData = e => e.nextElementSibling.click();
 const saveData = e => {
@@ -45,6 +53,7 @@ const saveData = e => {
     reader.readAsText(file);
 };
 export const initBackUp = () => {
+    backupMade = false;
     title("Gestion de Datos");
     removeCss();
     luyval.body(/*html*/`
@@ -53,6 +62,8 @@ export const initBackUp = () => {
         <div class="center">
             <button class="pretty" download>Descargar</button>
             <br /><br />
+            <button class="pretty err" del>Eliminar</button>
+            <br /><br />
             <button class="pretty warn" load>Carga de Datos</button>
             <input type="file" accept=".json" class="none" save />
             <br /><br />
@@ -60,6 +71,7 @@ export const initBackUp = () => {
     `);
     luyval.event.click2({
         download: makeBackUp,
+        del: deleteBackUp,
         load: loadData,
     });
     luyval.event.change({

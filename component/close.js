@@ -58,6 +58,7 @@ export const initClose = () => {
     let list = $(gclose);
     if (!list) list = [];
     let listHtml = "";
+    let total = 0.0;
     list.forEach(_ => {
         listHtml += /*html*/`
             <div>
@@ -65,11 +66,13 @@ export const initClose = () => {
                 <table>
                     <thead>
                         <tr>
-                            <th>Categoria</th>
                             <th>Habilitado</th>
+                            <th>Categoria</th>
                             <th>Nombre</th>
+                            <th>Medida</th>
                             <th>Precio</th>
                             <th>Cantidad</th>
+                            <th>Total</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -77,16 +80,25 @@ export const initClose = () => {
         _.products.forEach(__ => {
             listHtml += /*html*/`
                 <tr>
-                    <td>${__.category}</td>
                     <td>${__.enable ? "Si" : "No"}</td>
+                    <td>${__.category}</td>
                     <td>${__.name}</td>
+                    <td>${__.measure}</td>
                     <td>$${__.price}</td>
                     <td>${__.quantity}</td>
+                    <td>$${parseFloat(__.quantity * __.price).toFixed(2)}</td>
                 </tr>
             `;
+            total += parseFloat(__.quantity * __.price).toFixed(2);
         });
         listHtml += /*html*/`
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="6">Total</td>
+                            <td>$${parseFloat(total).toFixed(2)}</td>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
             <div class="page-break"></div>

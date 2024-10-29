@@ -96,3 +96,19 @@ tfoot {
 tfoot td {
     border-top: 2px solid #ccc;
 }
+
+.quantity {
+    color: blue;
+}
+.measure {
+    color: crimson;
+}
+.money {
+    background-color: springgreen;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.control-quantity:hover {
+    background-color: crimson;
+}

@@ -48,3 +48,12 @@ tfoot td:hover, tfoot td:hover a {
     color: #f3f3f3; 
     transition: background-color 0.3s ease;
 }
+tfoot > tr.center > td {
+    text-align: center;
+}
+
+td.td-selected:hover {
+    cursor: pointer;
+    color: crimson;
+    font-weight: bold;
+}

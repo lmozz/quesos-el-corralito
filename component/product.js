@@ -46,11 +46,11 @@ const viewCategory = e => {
 export const generateHTML = products => {
     if (!products) return "";
     const categories = products.reduce((acc, product) => {
-        const { category, name, uuid, price } = product;
+        const { category, name, uuid, price, measure } = product;
         if (!acc[category]) {
             acc[category] = [];
         }
-        acc[category].push({ name, uuid, price });
+        acc[category].push({ name, uuid, price, measure });
         return acc;
     }, {});
     let html = /*html*/`
@@ -66,10 +66,13 @@ export const generateHTML = products => {
                 <div class="category-product none">
                     ${products.map(_ => /*html*/`
                         <div class="product" uuid="${_.uuid}" counter="0">
-                            <strong>(0) </strong>
-                            <strong>${_.name} $${_.price}</strong>
-                            <button more>+</button>
-                            <button minus>-</button>
+                            <strong class="quantity">(0) </strong>
+                            <strong>
+                                <span class="measure">${_.measure}</span> 
+                                ${_.name} 
+                                <span class="money">$${_.price}</span></strong>
+                            <button more class="control-quantity">+</button>
+                            <button minus class="control-quantity">-</button>
                         </div>
                     `).join('')}
                 </div>
@@ -215,7 +218,7 @@ export const upload = e => {
     let existingProduct = order.find(_ => _.uuid === product.uuid);
     if (!existingProduct) {
         order.unshift({
-            name: product.name,
+            name: `${product.measure} ${product.name}`,
             uuid: product.uuid,
             price: product.price,
             counter: 1,

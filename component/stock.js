@@ -6,10 +6,19 @@ import { title } from "../tools/title.js";
 import { initItem } from "./item.js";
 import { initClose } from "./close.js";
 import { initEntry } from "./entry.js";
-let product = $(gproduct);
+import { getRevenue } from "../tools/revenue.js";
+let product = null;
 const renderProduct = () => {
-    if (!product) return "";
     let html = /*html*/`
+        <br />
+        <button class="pretty" new>Nuevo</button>
+        <button class="pretty warn" add>Agregar a Inventario</button>
+        <button class="pretty warn" entrys>Ver Ingresos</button>
+        <button class="pretty err" close>Cerrar Dia</button>
+        <button class="pretty err" see-closes>Ver Cierres</button>
+    `;
+    if (!product) return html;
+    html += /*html*/`
         <div class="product-container">
     `;
     product.forEach(_ => {
@@ -20,16 +29,19 @@ const renderProduct = () => {
                 <span>${_.name}</span><br />
                 <label title="Cambiar Categoria" edit-category>Categoria: </label> 
                 <span>${_.category}</span><br />
+                <label title="Cambiar Unidad de Medida" edit-measure>Medida: </label> 
+                <span>${_.measure}</span><br />
                 <label title="Cambiar Precio" edit-price>Precio: </label> 
                 <span>${_.price}</span><br />
                 <label>Cantidad: </label><span>${_.quantity}</span>
                 <div class="center">
                     <button class="pretty-2" enter>Precios</button>
-                    <button class="pretty-2 err" add-item>Añadir</button>
+                    <button class="pretty-2 warn" add-item>Añadir</button>
+                    <button class="pretty-2 err" remove-item>Eliminar</button>
                 </div>
                 <div class="none center">
                     <label>Cantidad: </label><input type="number" placeholder="Cant." /><br />
-                    <label>Unitario: </label><input type="number" placeholder="Unit." />
+                    <label>Costo Unit: </label><input type="number" placeholder="Unit." />
                 </div>
             </div>
         `;
@@ -51,12 +63,6 @@ const editProperty = (e, prop, message, error) => {
     $(sproduct, product);
     luyval.body(/*html*/`
         ${menu()}
-        <br />
-        <button class="pretty" new>Nuevo</button>
-        <button class="pretty warn" add>Agregar a Inventario</button>
-        <button class="pretty warn" entrys>Ver Ingresos</button>
-        <button class="pretty err" close>Cerrar Dia</button>
-        <button class="pretty err" see-closes>Ver Cierres</button>
         ${renderProduct()}
     `);
     if (prop == "price") {
@@ -76,14 +82,17 @@ const enterProduct = e => {
 };
 const newProduct = () => {
     let name = prompt("Nombre del nuevo producto");
-    if (name == "") return alert("No se ingreso ningun nombre");
+    if ((name || "") == "") return alert("No se ingreso ningun nombre");
     let uuid = luyval.randomCode(40);
     let category = prompt(`Categoria de ${name}`);
-    if (category == "") return alert("No se ingreso ninguna categoria");
+    if ((category || "") == "") return alert("No se ingreso ninguna categoria");
+    let measure = prompt(`Unidad de Medida de ${name}`);
+    if ((measure || "") == "") return alert("No se ingreso ninguna unidad de medida");
     if (!product) product = [];
     product.unshift({
         category: category,
         name: name,
+        measure: measure,
         price: 0.0, 
         quantity: 0,
         uuid: uuid
@@ -91,12 +100,6 @@ const newProduct = () => {
     $(sproduct, product);
     luyval.body(/*html*/`
         ${menu()}
-        <button class="pretty" new>Nuevo</button>
-        <button class="pretty warn" add>Agregar a Inventario</button>
-        <button class="pretty warn" entrys>Ver Ingresos</button>
-        <button class="pretty err" close>Cerrar Dia</button>
-        <button class="pretty err" see-closes>Ver Cierres</button>
-        <br />
         ${renderProduct()}
     `);
 };
@@ -108,12 +111,6 @@ const onOffProduct = e => {
     $(sproduct, product);
     luyval.body(/*html*/`
         ${menu()}
-        <br />
-        <button class="pretty" new>Nuevo</button>
-        <button class="pretty warn" add>Agregar a Inventario</button>
-        <button class="pretty warn" entrys>Ver Ingresos</button>
-        <button class="pretty err" close>Cerrar Dia</button>
-        <button class="pretty err" see-closes>Ver Cierres</button>
         ${renderProduct()}
     `);
 };
@@ -128,32 +125,40 @@ const addStock = () => {
     if (selected.length == 0) return alert("No hay ningun producto que agregar");
     let stockLine = [];
     let total = 0.0;
+    let totalPrice = 0.0;
     let flag = true;
     selected.forEach(_ => {
         let uuid = luyval.e.get(_.parentElement, "uuid");
         let quantity = _.children[1].value;
-        let price = _.children[4].value;
-        let prodName = product.find(_ => _.uuid == uuid).name;
+        let cost = _.children[4].value;
+        let prod = product.find(_ => _.uuid == uuid);
         if (quantity < 1 || quantity == "" || quantity == null || isNaN(quantity)) {
             flag = false;
-            alert(`La cantidad del producto ${prodName} no es correcta`);
+            alert(`La cantidad del producto ${prod.name} no es correcta`);
         }
-        if (price < 1 || price == "" || price == null || isNaN(price)) {
+        if (cost < 1 || cost == "" || cost == null || isNaN(cost)) {
             flag = false;
-            alert(`Las unidades del producto ${prodName} no es correcta`);
+            alert(`Las unidades del producto ${prod.name} no es correcta`);
         }
         quantity = parseInt(quantity);
-        price = parseFloat(price);
+        cost = parseFloat(cost);
         stockLine.unshift({
             product: {
-                name: prodName,
-                uuid: uuid, 
+                price: prod.price,
+                name: prod.name,
+                category: prod.category,
+                measure: prod.measure,
+                uuid: prod.uuid, 
+                total: parseFloat((quantity * prod.price).toFixed(2)),
             },
             quantity: quantity,
-            price: price,
-            total: parseFloat((quantity * price).toFixed(2)),
+            cost: cost,
+            total: parseFloat((quantity * cost).toFixed(2)),
+            profit: parseFloat((quantity * prod.price) - (quantity * cost)).toFixed(2),
+            revenue: getRevenue(quantity * prod.price, quantity * cost),
         });
-        total += parseFloat((quantity * price).toFixed(2));
+        total += parseFloat((quantity * cost).toFixed(2));
+        totalPrice += parseFloat((quantity * prod.price).toFixed(2));
     });
     if (!flag) return;
     let invoice = prompt("Ingrese el numero de factura");
@@ -163,29 +168,39 @@ const addStock = () => {
     let linkMh = prompt("Link al MH (opcional)");
     let stock = $(gstock);
     if (!stock) stock= [];
-    stock.unshift({
-        date: luyval.date(),
-        invoice: invoice,
-        description: description,
-        mark: mark,
-        linkMh: linkMh,
-        total: total,
-        line: stockLine,
-    });
-    stockLine.forEach(_ => {
-        let prod = product.find(__ => __.uuid == _.product.uuid);
-        prod.quantity += _.quantity;
-    });
+    let stockWithInvoice = stock.find(_ => _.invoice == invoice);
+    if (stockWithInvoice != null) {
+        stockWithInvoice.total += total;
+        stockWithInvoice.totalPrice += totalPrice;
+        stockWithInvoice.profit = parseFloat(stockWithInvoice.totalPrice - stockWithInvoice.total).toFixed(2);
+        stockWithInvoice.revenue = getRevenue(stockWithInvoice.totalPrice, stockWithInvoice.total);
+        stockWithInvoice.line.unshift(...stockLine);
+        stockLine.forEach(_ => {
+            let prod = product.find(__ => __.uuid == _.product.uuid);
+            prod.quantity += _.quantity;
+        });
+    } else {
+        stock.unshift({
+            date: luyval.date(),
+            invoice: invoice,
+            description: description,
+            mark: mark,
+            linkMh: linkMh,
+            total: total,
+            totalPrice: totalPrice,
+            profit: parseFloat(totalPrice - total).toFixed(2),
+            revenue: getRevenue(totalPrice, total),
+            line: stockLine,
+        });
+        stockLine.forEach(_ => {
+            let prod = product.find(__ => __.uuid == _.product.uuid);
+            prod.quantity += _.quantity;
+        });
+    }
     $(sstock, stock);
     $(sproduct, product);
     luyval.body(/*html*/`
         ${menu()}
-        <br />
-        <button class="pretty" new>Nuevo</button>
-        <button class="pretty warn" add>Agregar a Inventario</button>
-        <button class="pretty warn" entrys>Ver Ingresos</button>
-        <button class="pretty err" close>Cerrar Dia</button>
-        <button class="pretty err" see-closes>Ver Cierres</button>
         ${renderProduct()}
     `);
 };
@@ -198,7 +213,7 @@ const addItem = e => {
         return alert("Debe cerrar el dia para agregar un stock");
     }
     if (e.innerHTML == "Añadir") {
-        e.innerHTML = "Quitar";
+        e.innerHTML = "Cancelar";
         e = e.parentElement.nextElementSibling;
         luyval.class.del(e, "none");
         luyval.class.add(e, "selected");
@@ -239,21 +254,31 @@ const closeDay = () => {
     $(ssale, [ ...sales, ...openSales ]);
     luyval.body(/*html*/`
         ${menu()}
-        <br />
-        <button class="pretty" new>Nuevo</button>
-        <button class="pretty warn" add>Agregar a Inventario</button>
-        <button class="pretty warn" entrys>Ver Ingresos</button>
-        <button class="pretty err" close>Cerrar Dia</button>
-        <button class="pretty err" see-closes>Ver Cierres</button>
         ${renderProduct()}
     `);
     alert(`El dia ${luyval.date()} se cerro existosamente`);
+};
+const removeItem = e => {
+    if (!confirm("Esta seguro que desea eliminar el producto ?")) return;
+    e = e.parentElement.parentElement;
+    let uuid = luyval.e.get(e, "uuid");
+    let prod = product.find(_ => _.uuid === uuid);
+    let productName = prompt("Para validar la eliminacion de este producto; digite el nombre del producto");
+    if ((productName || "") !== prod.name) return alert("El nombre del producto no es el mismo");
+    let index = product.findIndex(_ => _.uuid === uuid);
+    product.splice(index, 1);
+    $(sproduct, product);
+    luyval.body(/*html*/`
+        ${menu()}
+        ${renderProduct()}
+    `);
 };
 const createEvents = () => {
     luyval.event.click({
         edit_name: [ editProperty, "name", "Ingrese el nuevo nombre", "No se edito el nombre" ],
         edit_category: [ editProperty, "category", "Ingrese la nueva categoria", "No se edito la categoria" ],
         edit_price: [ editProperty, "price", "Ingrese el nuevo precio", "No se edito el precio" ] ,
+        edit_measure: [ editProperty, "measure", "Ingrese la nueva unidad de medida", "No se edito la unidad de medida" ],
         enter: enterProduct,
         new: newProduct,
         onoff_product: onOffProduct, 
@@ -263,18 +288,16 @@ const createEvents = () => {
         close: closeDay,
         see_closes: seeClosesDay,
     });
+    luyval.event.click2({
+        remove_item: removeItem,
+    })
 };
 export const initStock = () => {
+    product = $(gproduct);
     title("Inventario");
     removeCss("./css/stock.css");
     luyval.body(/*html*/`
         ${menu()}
-        <br />
-        <button class="pretty" new>Nuevo</button>
-        <button class="pretty warn" add>Agregar a Inventario</button>
-        <button class="pretty warn" entrys>Ver Ingresos</button>
-        <button class="pretty err" close>Cerrar Dia</button>
-        <button class="pretty err" see-closes>Ver Cierres</button>
         ${renderProduct()}
     `);
     createEvents();

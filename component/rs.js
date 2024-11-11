@@ -13,7 +13,7 @@ const copyPaste = str =>  {
 };
 const facebook = () => copyPaste("https://www.facebook.com/profile.php?id=61566525224902");
 const instagram = () => copyPaste("https://www.instagram.com/quesoscorralitosv/");
-const whatsapp = () => copyPaste("https://www.instagram.com/quesoscorralitosv/");
+const whatsapp = () => copyPaste("https:wa.me/+50376935019");
 export const initRs = () => {
     title("Redes Sociales");
     removeCss("./css/rs.css");

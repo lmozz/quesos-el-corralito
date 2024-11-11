@@ -37,6 +37,12 @@ export const initProduct = () => {
         <br />
         ${generateHTML(products)}
     `);
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter' || (event.key >= '0' && event.key <= '9')) {
+            const givenMoneyElement = document.getElementById('given-money');
+            givenMoneyElement.focus();
+        }
+    });
 };
 const clientMoney = e => {
     let total = $("#total").innerHTML;

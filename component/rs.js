@@ -14,6 +14,7 @@ const copyPaste = str =>  {
 const facebook = () => copyPaste("https://www.facebook.com/profile.php?id=61566525224902");
 const instagram = () => copyPaste("https://www.instagram.com/quesoscorralitosv/");
 const whatsapp = () => copyPaste("https:wa.me/+50376935019");
+const tiktok = () => copyPaste("https://www.tiktok.com/@quesoselcorralito");
 export const initRs = () => {
     title("Redes Sociales");
     removeCss("./css/rs.css");
@@ -21,6 +22,7 @@ export const initRs = () => {
         fb: facebook,
         in: instagram,
         wa: whatsapp,
+        tt: tiktok,
     });
     luyval.body(/*html*/`
         ${menu()}
@@ -39,6 +41,11 @@ export const initRs = () => {
                 <h1>WhatsApp</h1>
                 <img src="./img/whatsapp.png" alt="WhatsApp" />
                 <button wa>Copiar Enlace</button>
+            </div>
+            <div class="social-card">
+                <h1>Tiktok</h1>
+                <img src="./img/tiktok.png" alt="TikTok" style="border-radius: 100px" />
+                <button tt>Copiar Enlace</button>
             </div>
         </div>
     `);

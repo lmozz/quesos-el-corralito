@@ -112,3 +112,13 @@ tfoot td {
 .control-quantity:hover {
     background-color: crimson;
 }
+
+.floaty{
+    width: 110px;
+    text-align: center;
+    border-radius: 2px;
+    outline: none;
+    border: none;
+    box-shadow: 2px 2px 4px gray;
+    cursor: pointer;
+}

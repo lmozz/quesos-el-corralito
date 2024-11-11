@@ -4,6 +4,7 @@ import { menu } from "./menu.js";
 import { removeCss } from "../tools/cssRemove.js";
 import { gproduct, gsale, ssale } from "./key.js";
 import { title } from "../tools/title.js";
+import { initSalesDay } from "./sales_day.js";
 let order = [];
 export const initProduct = () => {
     title("Punto de Venta");
@@ -20,10 +21,15 @@ export const initProduct = () => {
             minus: download,
             goto_print: print,
             view_category: viewCategory,
+            sales_day: salesDay,
+            client_money: clientMoney,
         });
         luyval.event.click2({
             save: saveDoc,
             erase: eraseDoc,
+        });
+        luyval.event.keyup({
+            client_money: clientMoney,
         });
     }
     luyval.body(/*html*/`
@@ -31,6 +37,22 @@ export const initProduct = () => {
         <br />
         ${generateHTML(products)}
     `);
+};
+const clientMoney = e => {
+    let total = $("#total").innerHTML;
+    if (total == "" || total == "0.00") {
+        e.value = "";
+        return;
+    }
+    if ($("#given-money").value == "") {
+        e.value = "";
+        $("#turned").innerHTML = "0";
+        return;
+    }
+    verifyReturned();
+};
+const salesDay = () => {
+    initSalesDay();
 };
 const viewCategory = e => {
     e = e.nextElementSibling;
@@ -58,6 +80,10 @@ export const generateHTML = products => {
             <button save class="pretty">Guardar</button>
             <button goto-print class="pretty warn">Imprimir</button>
             <button erase class="pretty err">Borrar</button>
+            <br />
+            <button sales-day class="pretty-2 warn">Ver Ventas del Dia</button>
+            <input type="number" placeholder="Dinero Dado" class="floaty" client-money id="given-money" />
+            <label><strong>Vuelto: $</strong><label id="turned">0</label></label>
     `;
     for (const [category, products] of Object.entries(categories)) {
         html += /*html*/`
@@ -178,6 +204,7 @@ export const invoice = () => {
     });
     $("#order").innerHTML = html;
     $("#total").innerHTML = total.toFixed(2);
+    verifyReturned();
 };
 export const saveDoc = () => {
     if (order.length == 0) return;
@@ -207,6 +234,18 @@ export const saveDoc = () => {
     $(ssale, sales);
     eraseDoc(null, true);
     alert(`Venta #${sales.length} guardada correctamente`);
+};
+const verifyReturned = () => {
+    let total = $("#total").innerHTML;
+    if (total == "" || total == "0.00") {
+        $("#given-money").value = "";
+        $("#turned").innerHTML = "0";
+    }
+    let givenMoney = $("#given-money").value;
+    if (isNaN(givenMoney) || givenMoney == "") return;
+    givenMoney = parseFloat(givenMoney);
+    total = parseFloat(total);
+    $("#turned").innerHTML = (parseFloat(givenMoney - total).toFixed(2)).toString();
 };
 export const upload = e => {
     let counter = parseInt(luyval.e.get(e.parentElement, "counter"));

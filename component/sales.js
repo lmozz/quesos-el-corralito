@@ -12,22 +12,31 @@ const groupSalesByDate = data => {
         return acc;
     }, {});
 };
-const generateHTML = groupedSales => {
-    let html = /*html*/`
-        <br />
-        <button class="pretty" print-pdf-close>Pdf Cerradas</button>
-        <button class="pretty" print-pdf-open>Pdf Abiertas</button>
-        <button class="pretty" print-pdf-global>Pdf</button>
-    `;
+const generateHTML = (groupedSales, userView) => {
+    let html = null;
+    if (!userView) {
+        html = /*html*/`
+            <br />
+            <button class="pretty" print-pdf-close>Pdf Cerradas</button>
+            <button class="pretty" print-pdf-open>Pdf Abiertas</button>
+            <button class="pretty" print-pdf-global>Pdf</button>
+        `;
+    } else {
+        html = /*html*/`
+            <br />
+        `;
+    }
     Object.keys(groupedSales).forEach(date => {
         html += `<h1 class="title-date">${date}</h1>`;
         groupedSales[date].forEach(sale => {
             html += /*html*/`
             <table>
                 <thead class="${sale.close ? "close" : ""}">
-                    <tr>
-                        <th class="title" rename uuid="${sale.uuid}" colspan="4">Titulo: ${sale.title == null || sale.title == "" ? "" : sale.title}</th>
-                    </tr>
+                    ${userView ? "" :   
+                        /*html*/ `<tr>
+                            <th class="title" rename uuid="${sale.uuid}" colspan="4">Titulo: ${sale.title == null || sale.title == "" ? "" : sale.title}</th>
+                        </tr>`
+                    }
                     <tr>
                         <th>Producto</th>
                         <th>Cantidad</th>
@@ -62,10 +71,10 @@ const generateHTML = groupedSales => {
     });
     return html;
 };
-const renderSales = data => {
+export const renderSales = (data, userView = false) => {
     if (data != false) {
         const groupedSales = groupSalesByDate(data);
-        const html = generateHTML(groupedSales);
+        const html = generateHTML(groupedSales, userView);
         return html;
     } else {
         return "";

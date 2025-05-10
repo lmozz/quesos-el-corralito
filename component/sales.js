@@ -57,7 +57,7 @@ const generateHTML = (groupedSales, userView) => {
                 <tfoot>
                     <tr>
                         <td colspan="3">Total</td>
-                        <td>$${sale.total.toFixed(2)}</td>
+                        <td>$${sale.total?.toFixed(2) ?? "?"}</td>
                     </tr>
                     <tr>
                         <td colspan="3" ${!userView ? "delete" : ""} uuid="${sale.uuid}" ${!userView ? `class="sale"` : ""}>Fecha</td>
